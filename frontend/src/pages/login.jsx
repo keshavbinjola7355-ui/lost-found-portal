@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 
 function Login() {
   const [rollNo, setRollNo] = useState("");
@@ -11,10 +11,7 @@ function Login() {
   };
 
   function handleLogin() {
-    if (
-      rollNo === demoUser.rollNo &&
-      password === demoUser.password
-    ) {
+    if (rollNo === demoUser.rollNo && password === demoUser.password) {
       alert("Login Successful!");
     } else {
       alert("Invalid Credentials!");
@@ -38,14 +35,13 @@ function Login() {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button onClick={handleLogin}>
-          Login
-        </button>
+        <button onClick={handleLogin}>Login</button>
+        <p className="signup-text">
+          Don't Have an Account? <Link to="/register">SIGN UP</Link>
+        </p>
       </div>
     </div>
   );
