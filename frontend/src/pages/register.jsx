@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import "../style/Register.css"
 
 function Register() {
   const [name, setName] = useState("");
@@ -83,7 +84,7 @@ function Register() {
         <button onClick={handleRegister}>Register</button>
 
         <p className="login-text">
-          Already have an account? <Link to="/">Login</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
