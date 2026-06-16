@@ -5,19 +5,21 @@ function Login() {
   const [rollNo, setRollNo] = useState("");
   const [password, setPassword] = useState("");
 
-  const demoUser = {
-    rollNo: "2301234",
-    password: "keshav123",
-  };
-
   function handleLogin() {
-    if (rollNo === demoUser.rollNo && password === demoUser.password) {
-      alert("Login Successful!");
+    const data = localStorage.getItem("college-user");
+    const user = JSON.parse(data);
+
+    if (!user) {
+      alert("No account found. Please register first.");
+      return;
+    }
+
+    if (rollNo === user.rollNo && password === user.password) {
+      alert(`Welcome ${user.name}!`);
     } else {
       alert("Invalid Credentials!");
     }
   }
-
   return (
     <div className="login-container">
       <div className="login-card">
