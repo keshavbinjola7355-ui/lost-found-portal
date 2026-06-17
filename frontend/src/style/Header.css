@@ -1,0 +1,180 @@
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Entire Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  width: 100%;
+  padding: 20px 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: linear-gradient(
+    135deg,
+    rgba(235, 240, 255, 0.85),
+    rgba(255, 245, 230, 0.85)
+  );
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.4);
+
+  box-shadow:
+    0 8px 30px
+    rgba(0, 0, 0, 0.05);
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a237e;
+
+  cursor: pointer;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 4px 12px
+    rgba(0, 0, 0, 0.05);
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Navigation Pills */
+nav div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 20px;
+
+  background: rgba(
+    255,
+    255,
+    255,
+    0.7
+  );
+
+  border: 1px solid
+    rgba(151, 176, 255, 0.3);
+
+  border-radius: 9999px;
+
+  color: #3366cc;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+/* Active Home Button */
+nav div:first-child {
+  background: white;
+
+  border-color:
+    rgba(151, 176, 255, 0.6);
+
+  box-shadow:
+    0 10px 15px -3px
+    rgba(151, 176, 255, 0.2);
+
+  color: #1a237e;
+
+  transform: translateY(-2px);
+}
+
+/* Hover Effect */
+nav div:hover {
+  background: white;
+
+  color: #1a237e;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 15px -3px
+    rgba(151, 176, 255, 0.2);
+}
+
+/* Icons inside Nav */
+nav span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Right Section */
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Username */
+.auth div {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a237e;
+}
+
+/* Logout Button */
+.auth button {
+  border: none;
+  background: transparent;
+
+  padding: 10px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.auth button:hover {
+  background:
+    rgba(255, 255, 255, 0.7);
+
+  color: #1a237e;
+
+  transform: scale(1.1);
+}
