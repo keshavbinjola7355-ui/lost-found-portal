@@ -1,0 +1,146 @@
+/* --- Academic Stewardship Footer Tokens --- */
+:root {
+  --footer-bg: #f1f3f5; /* Light greyish-blue background from your image */
+  --footer-border: #e2e8f0;
+  --footer-heading: #0f172a;
+  --footer-text: #475569;
+  --font-main: 'Montserrat', sans-serif;
+  --transition-fast: 0.2s ease;
+}
+
+/* --- Main Footer Container --- */
+.footer {
+  width: 100%;
+  background-color: var(--footer-bg);
+  border-top: 1px solid var(--footer-border);
+  padding: 4rem 4rem 2rem 4rem;
+  font-family: var(--font-main);
+  color: var(--footer-text);
+  margin-top: auto; /* Pushes the footer to the bottom */
+}
+
+/* --- Content Wrapper Layout --- */
+.footer-content {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 6rem;
+  padding-bottom: 3rem;
+}
+
+/* --- Left Branding Column --- */
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.footer-left .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-left .logo img {
+  height: 2.2rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-left .logo h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--footer-heading);
+  letter-spacing: -0.01em;
+}
+
+.footer-left p {
+  max-width: 360px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--footer-text);
+}
+
+/* --- Middle & Right Navigation Columns --- */
+.footer-middle,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-middle h4,
+.footer-right h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--footer-heading);
+  margin-bottom: 0.5rem;
+}
+
+.footer-middle p,
+.footer-right p {
+  font-size: 0.9rem;
+  color: var(--footer-text);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.footer-middle p:hover,
+.footer-right p:hover {
+  color: #000000;
+}
+
+/* --- Bottom Section: Copyright & Help Icons --- */
+.footer-bottom {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--footer-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom p {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--footer-text);
+}
+
+.footer-icons {
+  display: flex;
+  gap: 1rem;
+  color: var(--footer-text);
+  align-items: center;
+}
+
+.footer-icons svg {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.footer-icons svg:hover {
+  opacity: 1;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 2rem 1.5rem 2rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}

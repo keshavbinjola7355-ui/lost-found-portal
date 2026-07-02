@@ -1,180 +1,250 @@
+/* ==========================================================================
+   College Lost & Found — Header
+   Design tokens kept intentionally small: one accent color (teal) ties the
+   logo mark, the active nav item, and the avatar ring together. Everything
+   else stays quiet so that single thread reads as deliberate, not decorative.
+   ========================================================================== */
 
+:root {
+  --color-bg: #ffffff;
+  --color-bg-tint: #f8fafc;
+  --color-ink: #111827;
+  --color-muted: #64748b;
+  --color-line: #e7eaee;
+  --color-accent: #0f766e;
+  --color-accent-tint: #e6f5f3;
 
+  --font-main: "Montserrat", "Segoe UI", sans-serif;
+  --radius-md: 10px;
+  --shadow-sm:
+    0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 1px 0 rgb(15 23 42 / 0.03);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-/* Entire Header */
+body {
+  font-family: var(--font-main);
+}
+
+/* --------------------------------------------------------------------
+   Header shell — sits flush at the top, settles in once on first paint
+   -------------------------------------------------------------------- */
+
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-
-  width: 100%;
-  padding: 20px 40px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  background: linear-gradient(
-    135deg,
-    rgba(235, 240, 255, 0.85),
-    rgba(255, 245, 230, 0.85)
-  );
-
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-
-  border-bottom: 1px solid
-    rgba(255, 255, 255, 0.4);
-
-  box-shadow:
-    0 8px 30px
-    rgba(0, 0, 0, 0.05);
+  width: 100%;
+  padding: 1rem 2.5rem;
+  background-color: var(--color-bg-tint);
+  border-bottom: 1px solid var(--color-line);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  animation: header-settle 0.5s var(--ease) both;
 }
 
-/* Logo Section */
+@keyframes header-settle {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------
+   Brand mark
+   -------------------------------------------------------------------- */
+
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1a237e;
-
-  cursor: pointer;
+  gap: 0.85rem;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
 }
 
 .logo img {
-  width: 45px;
-  height: 45px;
-
-  object-fit: contain;
-
-  border-radius: 10px;
-
-  box-shadow:
-    0 4px 12px
-    rgba(0, 0, 0, 0.05);
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  background-color: var(--color-ink);
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
 }
 
-/* Navigation */
+.logo:hover img {
+  transform: scale(1.06) rotate(-2deg);
+  box-shadow: 0 4px 10px -2px rgb(15 23 42 / 0.25);
+}
+
+/* --------------------------------------------------------------------
+   Nav — underline grows from the center on hover; the active item
+   (always first in the markup) keeps it expanded permanently
+   -------------------------------------------------------------------- */
+
 nav {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 2.25rem;
 }
 
-/* Navigation Pills */
-nav div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 12px 20px;
-
-  background: rgba(
-    255,
-    255,
-    255,
-    0.7
-  );
-
-  border: 1px solid
-    rgba(151, 176, 255, 0.3);
-
-  border-radius: 9999px;
-
-  color: #3366cc;
-
-  font-size: 0.95rem;
-  font-weight: 600;
-
-  white-space: nowrap;
-
+nav > div {
+  position: relative;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-muted);
   cursor: pointer;
-
-  transition: all 0.3s ease;
+  padding-bottom: 0.4rem;
+  transition: color 0.2s var(--ease);
 }
 
-/* Active Home Button */
-nav div:first-child {
-  background: white;
-
-  border-color:
-    rgba(151, 176, 255, 0.6);
-
-  box-shadow:
-    0 10px 15px -3px
-    rgba(151, 176, 255, 0.2);
-
-  color: #1a237e;
-
-  transform: translateY(-2px);
+/* design is text-only in the nav, no leading icons */
+nav > div span {
+  display: none;
 }
 
-/* Hover Effect */
-nav div:hover {
-  background: white;
-
-  color: #1a237e;
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 15px -3px
-    rgba(151, 176, 255, 0.2);
+nav div .nav-link {
+  text-decoration: none;
+  color: var(--color-muted);
 }
 
-/* Icons inside Nav */
-nav span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+nav > div::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.25s var(--ease);
 }
 
-/* Right Section */
+nav > div:hover {
+  color: var(--color-ink);
+}
+
+nav > div:hover::after {
+  transform: scaleX(1);
+}
+
+/* Dynamic active styling */
+nav > div.active {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+nav > div.active .nav-link {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+nav > div.active::after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------------
+   User area — name, avatar, logout
+   -------------------------------------------------------------------- */
+
 .auth {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 0.9rem;
 }
 
-/* Username */
-.auth div {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #1a237e;
+.auth > div {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-/* Logout Button */
+/* avatar placeholder — no <img> exists in the JSX, so a person-silhouette
+   icon stands in for one. A soft teal ring appears on hover, echoing the
+   logo/nav accent. Swap for a real <img> later if one is added. */
+.auth > div::after {
+  content: "";
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  background-color: var(--color-ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8'/%3E%3C/svg%3E");
+  background-size: 58%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid var(--color-bg);
+  box-shadow: 0 0 0 0 var(--color-accent-tint);
+  transition:
+    box-shadow 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.auth > div:hover::after {
+  box-shadow: 0 0 0 4px var(--color-accent-tint);
+  transform: scale(1.04);
+}
+
 .auth button {
+  background: none;
   border: none;
-  background: transparent;
-
-  padding: 10px;
-
-  border-radius: 50%;
-
+  color: var(--color-muted);
+  cursor: pointer;
+  width: 2.2rem;
+  height: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
 
-  cursor: pointer;
-
-  transition: all 0.3s ease;
+.auth button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.2s var(--ease);
 }
 
 .auth button:hover {
-  background:
-    rgba(255, 255, 255, 0.7);
+  background-color: var(--color-accent-tint);
+  color: var(--color-accent);
+}
 
-  color: #1a237e;
+.auth button:hover svg {
+  transform: translateX(2px);
+}
 
-  transform: scale(1.1);
+/* --------------------------------------------------------------------
+   Respect reduced-motion preferences
+   -------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    animation: none;
+  }
+  .logo img,
+  nav > div::after,
+  .auth > div::after,
+  .auth button,
+  .auth button svg {
+    transition: none;
+  }
 }
