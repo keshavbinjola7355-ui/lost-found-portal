@@ -1,38 +1,28 @@
-import express from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+dotenv.config(); // Must be first — loads .env before any other import reads process.env
 
-// Load environment variables
-dotenv.config();
+import app from './app.js';
+import connectDB from './config/db.js';
 
-const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/lost_found';
 
-// Middleware
-app.use(express.json());
-
-// Basic route to check server status
-app.get('/', (req, res) => {
-  res.json({ message: 'Server is running' });
-});
-
-// Database connection function
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`Error connecting to MongoDB: ${error.message}`);
-    process.exit(1);
-  }
-};
-
-// Start connection & server
+/**
+ * startServer
+ *
+ * Connects to MongoDB first, then starts the HTTP server.
+ * This order guarantees the app never receives requests before
+ * the database is ready.
+ *
+ * If connectDB() throws (e.g. wrong MONGO_URI), the process exits
+ * with code 1 before app.listen is ever called.
+ */
 const startServer = async () => {
-  await connectDB();
+  await connectDB(); // Establish MongoDB connection (exits on failure)
+
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`📡 API base: http://localhost:${PORT}/api`);
+    console.log(`🔍 Health: http://localhost:${PORT}/api/health`);
   });
 };
 
