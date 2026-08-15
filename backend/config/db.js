@@ -1,4 +1,11 @@
 import mongoose from 'mongoose';
+import dns from 'dns';
+
+// ── Force Google DNS (8.8.8.8) ───────────────────────────────────────────────
+// The local router DNS cannot resolve MongoDB Atlas SRV records (_mongodb._tcp.*).
+// We override the system resolver here so Node.js uses Google's public DNS,
+// which correctly resolves the SRV record used in mongodb+srv:// URIs.
+dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
 
 /**
  * connectDB
